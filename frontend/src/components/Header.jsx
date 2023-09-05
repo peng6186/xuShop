@@ -48,7 +48,9 @@ const Header = () => {
           </div>
           <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
             <AiOutlineUser />
-            <span>Sign In</span>
+            <Link to={"/login"}>
+              <span>Log In</span>
+            </Link>
           </div>
         </div>
 
@@ -93,7 +95,9 @@ const Header = () => {
             </div>
             <div className="flex gap-1 justify-center items-center font-semibold text-slate-500 cursor-pointer hover:text-cyan-400 text-lg">
               <AiOutlineUser />
-              <span>Sign In</span>
+              <Link to={"/login"} onClick={() => setMobileMenuOpen(false)}>
+                <span>Sign In</span>
+              </Link>
             </div>
           </div>
         </div>
