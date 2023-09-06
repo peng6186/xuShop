@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useLogInMutation } from "../redux/slices/usersApiSlice";
+import { useRegisterMutation } from "../redux/slices/usersApiSlice";
 import { setCredentials } from "../redux/slices/authslice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 
-const LogInScreen = () => {
+const RegisterScreen = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await login({ email, password }).unwrap();
-      console.log({ res });
-      dispatch(setCredentials({ ...res }));
-      navigate(redirectStr);
-    } catch (error) {
-      toast.error(error?.data?.message || error.error);
-    }
-  };
+  const [confirmpassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLogInMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const redirectStr = searchParams.get("redirect") || "/";
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (password !== confirmpassword) {
+      toast.error("Password do not math");
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        console.log({ res });
+        dispatch(setCredentials({ ...res }));
+        navigate(redirectStr);
+      } catch (error) {
+        toast.error(error?.data?.message || error.error);
+      }
+    }
+  };
 
   // check whether the user is already loggin in when he lands on this page
   useEffect(() => {
@@ -41,7 +48,21 @@ const LogInScreen = () => {
   return (
     <div className="max-w-[75%] mx-auto py-4 flex justify-center items-center">
       <form className="flex flex-col gap-8" onSubmit={submitHandler}>
-        <h2 className="text-[#828f9d] text-4xl font-semibold">Log In</h2>
+        <h2 className="text-[#828f9d] text-4xl font-semibold">Register</h2>
+        <div className="flex flex-col gap-2 w-[450px]">
+          <label className="text-xl text-slate-500" htmlFor="email">
+            Name:
+          </label>
+          <input
+            className="w-full border rounded-md p-2"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
         <div className="flex flex-col gap-2 w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="email">
             Email:
@@ -56,6 +77,7 @@ const LogInScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col gap-2  w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="pw">
             Password:
@@ -70,20 +92,34 @@ const LogInScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <div className="flex flex-col gap-2  w-[450px]">
+          <label className="text-xl text-slate-500" htmlFor="cfpw">
+            Confirm Password:
+          </label>
+          <input
+            className="w-full border rounded-md p-2"
+            type="password"
+            name="confirmpassword"
+            id="cfpw"
+            placeholder="Confirm your password"
+            value={confirmpassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
         <button
           disabled={isLoading}
           className="py-2 px-4 border rounded-lg text-slate-500 font-semibold hover:opacity-60"
         >
-          Log In
+          Register
         </button>
         {isLoading && <Loader />}
         <p>
-          New Customer?{" "}
+          Already have an account?{" "}
           <Link
-            to={redirectStr ? `/register?redirect=${redirectStr}` : "/register"}
+            to={redirectStr ? `/login?redirect=${redirectStr}` : "/login"}
             className="underline"
           >
-            Register
+            Log in
           </Link>
         </p>
       </form>
@@ -91,4 +127,4 @@ const LogInScreen = () => {
   );
 };
 
-export default LogInScreen;
+export default RegisterScreen;
