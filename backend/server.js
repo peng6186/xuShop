@@ -1,5 +1,6 @@
 const productRoute = require("./routes/productRoute.js");
 const userRoutes = require("./routes/userRoutes.js");
+const orderRoutes = require("./routes/orderRoutes.js");
 const express = require("express");
 const dotenv = require("dotenv");
 const cookie_parser = require("cookie-parser");
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

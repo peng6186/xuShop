@@ -32,8 +32,11 @@ const ProductDetailScreen = () => {
       ) : (
         <div className="flex flex-col gap-8 md:max-w-[75%] mx-auto">
           <div className="goback-btn">
-            <button className="px-4 py-2 bg-slate-200 rounded-md font-semibold text-slate-500">
-              <Link to={"/"}>Go Back</Link>
+            <button
+              onClick={() => navigate(-1)}
+              className="px-4 py-2 bg-slate-200 rounded-md font-semibold text-slate-500"
+            >
+              Go Back
             </button>
           </div>
 
