@@ -126,7 +126,7 @@ const PlaceOrderScreen = () => {
           </Disclosure>
         </div>
 
-        <div className="order-summary border rounded-md py-2 px-4 w-full max-w-[450px] h-fit">
+        <div className="order-summary flex-1 border rounded-md py-2 px-4 w-full max-w-[450px] h-fit">
           <h2 className="text-xl text-textprimary font-bold">Order Summary</h2>
           <div className="text-textprimary flex flex-col gap-x-2">
             <div className="mt-4 flex justify-between items-center">
