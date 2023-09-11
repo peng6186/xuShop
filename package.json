@@ -4,11 +4,13 @@
   "description": "Modern eCommerce Web App using MERN stack",
   "main": "index.js",
   "scripts": {
+    "start": "node backend/server.js",
     "client": "npm run dev --prefix frontend",
     "server": "nodemon backend/server.js",
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d",
-    "dev": "concurrently 'npm run client' 'npm run server' "
+    "dev": "concurrently 'npm run client' 'npm run server' ",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "xu sde",
