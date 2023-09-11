@@ -8,7 +8,7 @@ const {
   deleteUser,
   getUserByID,
   updateUser,
-} = require("../controller/userCOntroller");
+} = require("../controller/userController");
 
 const { protect, admin } = require("../middleware/authMiddleware");
 
