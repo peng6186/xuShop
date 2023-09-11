@@ -95,6 +95,10 @@ const Header = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <button
+                            onClick={() => {
+                              navigate("/profile");
+                              setMobileMenuOpen(false);
+                            }}
                             className={`${
                               active
                                 ? "bg-violet-500 text-white"
@@ -202,6 +206,10 @@ const Header = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <button
+                              onClick={() => {
+                                navigate("/profile");
+                                setMobileMenuOpen(false);
+                              }}
                               className={`${
                                 active
                                   ? "bg-violet-500 text-white"

@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./pages/HomeScreen";
 import ProductDetailScreen from "./pages/ProductDetailScreen";
-import CartScreen from "./pages/cartScreen";
+import CartScreen from "./pages/CartScreen";
 import LogInScreen from "./pages/LogInScreen";
 import RegisterScreen from "./pages/RegisterScreen";
 import ShippingScreen from "./pages/ShippingScreen";
@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PaymentScreen from "./pages/PaymentScreen";
 import PlaceOrderScreen from "./pages/PlaceOrderScreen";
 import OrderScreen from "./pages/OrderScreen";
+import ProfileScreen from "./pages/ProfileScreen";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
             <Route path={`/payment`} element={<PaymentScreen />} />
             <Route path={`/placeorder`} element={<PlaceOrderScreen />} />
             <Route path={`/order/:id`} element={<OrderScreen />} />
+            <Route path={`/profile`} element={<ProfileScreen />} />
           </Route>
         </Routes>
       </main>

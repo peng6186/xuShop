@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Message from "../components/Message";
+import Notification from "../components/Notification";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/slices/cartslice";
@@ -58,12 +58,12 @@ const CartScreen = () => {
           Shopping Cart
         </h1>
         {cartItems.length === 0 ? (
-          <Message color={"green"}>
+          <Notification>
             Your cart is empty. &nbsp;{" "}
             <Link to="/" className="underline">
               Go Back
             </Link>{" "}
-          </Message>
+          </Notification>
         ) : (
           <div className="flex flex-col-reverse lg:flex-row justify-between gap-4">
             <div className="flex-1 flex flex-col gap-5">

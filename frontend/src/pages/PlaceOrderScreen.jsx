@@ -17,7 +17,7 @@ const PlaceOrderScreen = () => {
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
   const placeOrderHandler = async () => {
     try {
-      console.log("enter try");
+      // console.log("enter try");
       const res = await createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
@@ -27,9 +27,9 @@ const PlaceOrderScreen = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
-      console.log("after await createOrder");
+      // console.log("after await createOrder");
       dispatch(clearCartItems());
-      console.log("after clearCartItems");
+      // console.log("after clearCartItems");
       navigate(`/order/${res._id}`);
       // console.log(res);
     } catch (err) {
@@ -112,7 +112,7 @@ const PlaceOrderScreen = () => {
                             </div>
                             <div>
                               {item.qty} x ${item.price} = $
-                              {item.qty * item.price}
+                              {(item.qty * item.price).toFixed(2)}
                             </div>
                           </div>
                           <hr className="my-4" />
