@@ -16,6 +16,9 @@ import PaymentScreen from "./pages/PaymentScreen";
 import PlaceOrderScreen from "./pages/PlaceOrderScreen";
 import OrderScreen from "./pages/OrderScreen";
 import ProfileScreen from "./pages/ProfileScreen";
+import AdminProtecRoute from "./components/AdminProtecRoute";
+import OrderListScreen from "./pages/admin/OrderListScreen";
+import ProductListScreen from "./pages/admin/ProductListScreen";
 
 const App = () => {
   return (
@@ -35,6 +38,13 @@ const App = () => {
             <Route path={`/placeorder`} element={<PlaceOrderScreen />} />
             <Route path={`/order/:id`} element={<OrderScreen />} />
             <Route path={`/profile`} element={<ProfileScreen />} />
+          </Route>
+          <Route path="" element={<AdminProtecRoute />}>
+            <Route path={`/admin/orderlist`} element={<OrderListScreen />} />
+            <Route
+              path={`/admin/productlist`}
+              element={<ProductListScreen />}
+            />
           </Route>
         </Routes>
       </main>

@@ -7,6 +7,7 @@ import {
   useGetOrderDetailQuery,
   usePayOrderMutation,
   useGetPaypalClientIdQuery,
+  useDeliverOrderMutation,
 } from "../redux/slices/orderApiSlice";
 
 import Message from "../components/Message";
@@ -22,6 +23,8 @@ const OrderScreen = () => {
     error,
   } = useGetOrderDetailQuery(orderId);
 
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
   const [payOrder, { isLoading: isPayOrderLoading }] = usePayOrderMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -67,6 +70,12 @@ const OrderScreen = () => {
         return orderID;
       });
   }
+
+  const deliverHandler = async () => {
+    await deliverOrder(orderId);
+    refetch();
+    toast.success("This order has been delivered");
+  };
   useEffect(() => {
     // if Paypal seller Id is succefully loaded
     if (!errorPayPal && !loadingPayPal && paypal.clientId) {
@@ -117,7 +126,7 @@ const OrderScreen = () => {
               {order.shippingAddress.country}
             </p>
             {order.isDelivered ? (
-              <Message color="green">Delivered on {order.deliveredAt}</Message>
+              <Notification>Delivered on {order.deliveredAt}</Notification>
             ) : (
               <Message>Not Delivered</Message>
             )}
@@ -219,77 +228,27 @@ const OrderScreen = () => {
                   )}
                 </div>
               )}
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <div>
+                    <button
+                      type="button"
+                      className="py-2 px-4 border rounded-lg font-bold"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-
-  // <div className="max-w-[75%] mx-auto py-4 flex flex-col  items-center">
-  //   <div>
-  //     <h2>Order {order._id}</h2>
-  //   </div>
-
-  //   <div className="flex flex-col-reverse md:flex-row md:justify-between gap-6 mt-10 w-full">
-  //     <div className="order-detail flex-1 max-w-[550px]">
-  //       <div>
-  //         <h2>Shipping</h2>
-  //         <p>
-  //           <strong>Name: </strong> {order.user.name}
-  //         </p>
-  //         <p>
-  //           <strong>Email: </strong>{" "}
-  //           <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
-  //         </p>
-  //         <p>
-  //           <strong>Address:</strong>
-  //           {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-  //           {order.shippingAddress.postalCode},{" "}
-  //           {order.shippingAddress.country}
-  //         </p>
-  //         {order.isDelivered ? (
-  //           <Message>Delivered on {order.deliveredAt}</Message>
-  //         ) : (
-  //           <Message>Not Delivered</Message>
-  //         )}
-  //       </div>
-  //     </div>
-  //     <div className="order-summary flex-1 border rounded-md py-2 px-4 w-full max-w-[400px] h-fit">
-  //       <h2 className="text-xl text-textprimary font-bold">Order Summary</h2>
-  //       <div className="text-textprimary flex flex-col gap-x-2">
-  //         <div className="mt-4 flex justify-between items-center">
-  //           <div>Items</div>
-  //           <div>${cart.itemsPrice}</div>
-  //         </div>
-  //         <div className="flex justify-between items-center">
-  //           <div>Shipping</div>
-  //           <div>${cart.shippingPrice}</div>
-  //         </div>
-  //         <div className="flex justify-between items-center">
-  //           <div>Tax</div>
-  //           <div>${cart.taxPrice}</div>
-  //         </div>
-  //         <div className="flex justify-between items-center">
-  //           <div>Total</div>
-  //           <div>${cart.totalPrice}</div>
-  //         </div>
-  //         <div>{error && <Message>{error?.data?.message}</Message>}</div>
-  //         <div className="mt-4">
-  //           <button
-  //             type="button"
-  //             className="py-2 px-4 border rounded-md"
-  //             disabled={cart.cartItems === 0}
-  //             onClick={placeOrderHandler}
-  //           >
-  //             Place Order
-  //           </button>
-  //           {isLoading && <Loader />}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </div>
 };
 
 export default OrderScreen;
