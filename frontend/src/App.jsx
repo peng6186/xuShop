@@ -19,6 +19,7 @@ import ProfileScreen from "./pages/ProfileScreen";
 import AdminProtecRoute from "./components/AdminProtecRoute";
 import OrderListScreen from "./pages/admin/OrderListScreen";
 import ProductListScreen from "./pages/admin/ProductListScreen";
+import ProductEditScreen from "./pages/admin/ProductEditScreen";
 
 const App = () => {
   return (
@@ -46,6 +47,10 @@ const App = () => {
               element={<ProductListScreen />}
             />
           </Route>
+          <Route
+            path="/admin/product/:id/edit"
+            element={<ProductEditScreen />}
+          />
         </Routes>
       </main>
       <Footer />

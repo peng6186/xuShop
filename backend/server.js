@@ -1,6 +1,7 @@
 const productRoute = require("./routes/productRoute.js");
 const userRoutes = require("./routes/userRoutes.js");
 const orderRoutes = require("./routes/orderRoutes.js");
+const uploadRoutes = require("./routes/uploadRoutes.js");
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
@@ -30,11 +31,13 @@ app.use(cookie_parser());
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/upload", uploadRoutes);
+
 app.get("/api/config/paypal", (req, res) =>
   res.send({ clientId: process.env.PAYPAL_SELLER_ID })
 );
 
-// const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
