@@ -3,11 +3,28 @@ import { Link } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from "../../redux/slices/productsApiSlice";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
 
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation();
 
+  const createProductHandler = async () => {
+    if (window.confirm("Do you want to create a new product?")) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
   const deleteHandler = () => {
     console.log("delete");
   };
@@ -18,12 +35,16 @@ const ProductListScreen = () => {
           <h1 className="text-[#828f9d] text-4xl font-semibold">Products</h1>
         </div>
         <div className="">
-          <button className="px-4 py-2 border flex items-center gap-2 rounded-md">
+          <button
+            onClick={createProductHandler}
+            className="px-4 py-2 border flex items-center gap-2 rounded-md"
+          >
             <FaPlus /> Create Product
           </button>
         </div>
       </div>
 
+      {loadingCreate && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -50,11 +71,11 @@ const ProductListScreen = () => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td className="flex items-start gap-2">
-                    <div to={`/admin/product/${product._id}/edit`}>
+                    <Link to={`/admin/product/${product._id}/edit`}>
                       <button className="border">
                         <FaEdit />
                       </button>
-                    </div>
+                    </Link>
                     <button
                       className="border"
                       onClick={() => deleteHandler(product._id)}
