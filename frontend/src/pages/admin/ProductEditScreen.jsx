@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import {
   useGetProductByIdQuery,
   useUpdateProductMutation,
+  useUploadProductImageMutation,
+  useDeleteProductMutation,
 } from "../../redux/slices/productsApiSlice";
 
 const ProductEditScreen = () => {
@@ -30,6 +32,9 @@ const ProductEditScreen = () => {
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
+
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -52,6 +57,18 @@ const ProductEditScreen = () => {
       toast.error(err?.data?.message || err.error);
     }
   };
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      setImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   useEffect(() => {
     if (product) {
       setName(product.name);
@@ -107,7 +124,24 @@ const ProductEditScreen = () => {
               ></input>
             </div>
 
-            {/* IMAGE INPUT PLACEHOLDER */}
+            <div className="flex flex-col gap-2  w-[450px]">
+              <label htmlFor="image" className="text-xl text-slate-500">
+                Image
+              </label>
+              <input
+                id="image"
+                type="text"
+                placeholder="Enter image url"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              ></input>
+              <input
+                label="Choose File"
+                onChange={uploadFileHandler}
+                type="file"
+              ></input>
+              {loadingUpload && <Loader />}
+            </div>
 
             <div className="flex flex-col gap-2  w-[450px]">
               <label className="text-xl text-slate-500" htmlFor="brand">

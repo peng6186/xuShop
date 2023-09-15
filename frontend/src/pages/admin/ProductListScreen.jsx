@@ -7,13 +7,16 @@ import { toast } from "react-toastify";
 import {
   useGetProductsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from "../../redux/slices/productsApiSlice";
-import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
 
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
+
+  const [deleteProduct, { isLoading: loadingDelete }] =
+    useDeleteProductMutation();
 
   const createProductHandler = async () => {
     if (window.confirm("Do you want to create a new product?")) {
@@ -25,8 +28,16 @@ const ProductListScreen = () => {
       }
     }
   };
-  const deleteHandler = () => {
-    console.log("delete");
+  const deleteHandler = async (id) => {
+    if (window.confirm("Do you want to delete this product")) {
+      try {
+        await deleteProduct(id);
+        toast.success("Product deleted");
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   };
   return (
     <div className="max-w-[75%] mx-auto py-4 flex flex-col  gap-4">
@@ -45,6 +56,7 @@ const ProductListScreen = () => {
       </div>
 
       {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

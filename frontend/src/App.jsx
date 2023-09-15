@@ -20,6 +20,7 @@ import AdminProtecRoute from "./components/AdminProtecRoute";
 import OrderListScreen from "./pages/admin/OrderListScreen";
 import ProductListScreen from "./pages/admin/ProductListScreen";
 import ProductEditScreen from "./pages/admin/ProductEditScreen";
+import UserListScreen from "./pages/admin/UserListScreen";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
             path="/admin/product/:id/edit"
             element={<ProductEditScreen />}
           />
+          <Route path="/admin/userlist" element={<UserListScreen />} />
         </Routes>
       </main>
       <Footer />

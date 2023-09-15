@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="" >
-    <img src="images/logo.png" alt="Logo" width="30%">
+    <img src="pics/logo.png" alt="Logo" width="30%">
   </a>
 <!--  <a href="https://sbodify.netlify.app/">
     <h1 align="center">Spodify</h1>
@@ -12,7 +12,7 @@
   </h3>
 </p>
 <p align="center">
-<img src="images/xushop.jpg" style="width:90%;margin-left:auto" alt="img1" >   
+<img src="pics/xushop.jpg" style="width:90%;margin-left:auto" alt="img1" >   
 </p>
 
 <!-- ABOUT THE PROJECT -->
@@ -30,14 +30,14 @@
   - **Top products carousel (under construction)**: Customers could see what products are now currently trending in the market.
 
 <p align="center">
-<img src="images/userProfile.jpg" style="width:60%;margin-left:auto;" alt="img1" >   &emsp14;&emsp14;&emsp14;&emsp14;
+<img src="pics/userProfile.jpg" style="width:60%;margin-left:auto;" alt="img1" >   &emsp14;&emsp14;&emsp14;&emsp14;
   &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-  <img src="images/menu_mobile.jpg" style="width:30%;margin-left:auto;height:280px" alt="img1" >
+  <img src="pics/menu_mobile.jpg" style="width:30%;margin-left:auto;height:280px" alt="img1" >
 </p>
 <p align="center">
-<img src="images/payment.jpg" style="width:60%;margin-left:auto;" alt="img1" >   &emsp14;&emsp14;&emsp14;&emsp14;
+<img src="pics/payment.jpg" style="width:60%;margin-left:auto;" alt="img1" >   &emsp14;&emsp14;&emsp14;&emsp14;
   &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
-  <img src="images/productdetail.jpg" style="width:30%;margin-left:auto;height:50%" alt="img1" >
+  <img src="pics/productdetail.jpg" style="width:30%;margin-left:auto;height:50%" alt="img1" >
 </p>
 
 ### Built With

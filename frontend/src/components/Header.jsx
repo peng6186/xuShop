@@ -199,6 +199,24 @@ const Header = () => {
                           </button>
                         )}
                       </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => {
+                              navigate("/admin/userlist");
+                              setMobileMenuOpen(false);
+                            }}
+                            className={`${
+                              active
+                                ? "bg-violet-500 text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <MdInventory className="mr-2 h-5 w-5" />
+                            Users
+                          </button>
+                        )}
+                      </Menu.Item>
                     </div>
                   </Menu.Items>
                 </Transition>
@@ -375,6 +393,24 @@ const Header = () => {
                             >
                               <MdInventory className="mr-2 h-5 w-5" />
                               Orders
+                            </button>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={() => {
+                                navigate("/admin/userlist");
+                                setMobileMenuOpen(false);
+                              }}
+                              className={`${
+                                active
+                                  ? "bg-violet-500 text-white"
+                                  : "text-gray-900"
+                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            >
+                              <MdInventory className="mr-2 h-5 w-5" />
+                              Users
                             </button>
                           )}
                         </Menu.Item>
