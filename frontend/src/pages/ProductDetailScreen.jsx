@@ -3,26 +3,52 @@ import Rating from "../components/Rating";
 import { useState } from "react";
 
 import { useGetProductByIdQuery } from "../redux/slices/productsApiSlice";
+import { useCreateReviewMutation } from "../redux/slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/cartslice";
+import { toast } from "react-toastify";
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams();
 
   const [qty, setQty] = useState(1);
-  // console.log({ qty });
-  // console.log(typeof qty);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
+  const { userInfo } = useSelector((state) => state.auth);
+  const [createReview, { isLoading: loadingProductReview }] =
+    useCreateReviewMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data: product, isLoading, error } = useGetProductByIdQuery(productId);
+  console.log("rating: ", rating);
+  console.log("typeof rating: ", typeof rating);
+  const {
+    data: product,
+    isLoading,
+    error,
+    refetch,
+  } = useGetProductByIdQuery(productId);
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
     navigate("/cart");
   };
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
+    try {
+      await createReview({
+        productId,
+        rating,
+        comment,
+      }).unwrap();
+      refetch();
+      toast.success("Review created successfully");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -54,11 +80,12 @@ const ProductDetailScreen = () => {
                 {product.name}
               </h2>
               <hr />
-              <div>
+              <div className="flex">
                 <Rating
                   rating={product.rating}
                   numReviews={product.numReviews}
-                />
+                />{" "}
+                reviews
               </div>
               <hr />
               <p>
@@ -123,7 +150,112 @@ const ProductDetailScreen = () => {
             </div>
           </div>
 
-          <div>Review</div>
+          <div className="flex flex-col gap-4">
+            <h2 className="text-[#828f9d] text-2xl font-semibold">Reviews</h2>
+            {product.reviews.length === 0 && <Message>No Reviews</Message>}
+            <ul>
+              {product.reviews.map((review) => (
+                <li key={review._id}>
+                  <strong>{review.name}</strong>
+                  <Rating rating={review.rating} />
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="divider"></div>
+            <div className="flex flex-col gap-4 w-[50%]">
+              <h2 className="text-[#828f9d] text-2xl font-semibold">
+                Write a Customer Review
+              </h2>
+
+              {loadingProductReview && <Loader />}
+
+              {userInfo ? (
+                <form onSubmit={submitHandler}>
+                  <div className="my-2 flex flex-col gap-4">
+                    <label className="text-[#828f9d] text-xl">Rating</label>
+
+                    <div className="flex  gap-2">
+                      <div className="rating">
+                        <input
+                          type="radio"
+                          name="rating-2"
+                          value={1}
+                          className="mask mask-star-2 bg-orange-400"
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                        <input
+                          type="radio"
+                          name="rating-2"
+                          value={2}
+                          className="mask mask-star-2 bg-orange-400"
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                        <input
+                          type="radio"
+                          name="rating-2"
+                          value={3}
+                          className="mask mask-star-2 bg-orange-400"
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                        <input
+                          type="radio"
+                          name="rating-2"
+                          value={4}
+                          className="mask mask-star-2 bg-orange-400"
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                        <input
+                          type="radio"
+                          name="rating-2"
+                          value={5}
+                          className="mask mask-star-2 bg-orange-400"
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                      </div>
+                      <p>
+                        {rating == 1
+                          ? "Poor"
+                          : rating == 2
+                          ? "Fair"
+                          : rating == 3
+                          ? "Good"
+                          : rating == 4
+                          ? "Very Good"
+                          : "Excellent"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="my-2 flex flex-col gap-4">
+                    <label htmlFor="comment" className="text-[#828f9d] text-xl">
+                      Comment
+                    </label>
+                    <textarea
+                      className="p-2 border rounded-md"
+                      id="comment"
+                      row="5"
+                      required
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <button
+                    disabled={loadingProductReview}
+                    type="submit"
+                    className="mt-4 btn btn-primary"
+                  >
+                    Submit
+                  </button>
+                </form>
+              ) : (
+                <Message>
+                  Please <Link to="/login">sign in</Link> to write a review
+                </Message>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </>
