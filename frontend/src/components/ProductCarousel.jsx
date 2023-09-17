@@ -9,7 +9,7 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message>{error?.data?.message || error.error}</Message>
   ) : (
-    <div className="carousel w-full bg-[#3b4c5c]">
+    <div className="carousel w-full bg-[#3b4c5c] rounded-md">
       {products.map((product, idx) => (
         <div key={product._id} className="carousel-item w-full relative">
           <Link to={`/product/${product._id}`} id={idx}>
@@ -25,10 +25,16 @@ const ProductCarousel = () => {
             </div>
           </Link>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href={`#${idx - 1}`} className="btn btn-circle">
+            <a
+              href={idx == 0 ? `#${products.length - 1}` : `#${idx - 1}`}
+              className="btn btn-circle"
+            >
               ❮
             </a>
-            <a href={`#${idx + 1}`} className="btn btn-circle">
+            <a
+              href={idx == products.length - 1 ? "#0" : `#${idx + 1}`}
+              className="btn btn-circle"
+            >
               ❯
             </a>
           </div>

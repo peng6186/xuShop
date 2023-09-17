@@ -9,6 +9,7 @@ import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/cartslice";
 import { toast } from "react-toastify";
+import MetaInfo from "../components/MetaInfo";
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams();
@@ -57,6 +58,7 @@ const ProductDetailScreen = () => {
         <Message>{error?.data?.message || error.error}</Message>
       ) : (
         <div className="flex flex-col gap-8 md:max-w-[75%] mx-auto">
+          <MetaInfo title={product.name} />
           <div className="goback-btn">
             <button
               onClick={() => navigate(-1)}
