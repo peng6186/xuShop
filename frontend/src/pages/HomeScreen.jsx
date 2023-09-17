@@ -5,6 +5,7 @@ import Product from "../components/Product";
 import { useGetProductsQuery } from "../redux/slices/productsApiSlice";
 import { useParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import ProductCarousel from "../components/ProductCarousel";
 const HomeScreen = () => {
   const { keyword, pageNumber } = useParams();
 
@@ -14,6 +15,16 @@ const HomeScreen = () => {
   });
   return (
     <>
+      <div className="max-w-[75%] mx-auto mb-4">
+        {!keyword ? (
+          <ProductCarousel />
+        ) : (
+          <Link to="/" className="btn ">
+            Exit Search Mode
+          </Link>
+        )}
+      </div>
+
       {isLoading ? (
         <Loader />
       ) : error ? (

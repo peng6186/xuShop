@@ -5,7 +5,7 @@ const Product = require("../models/productModel.js");
 // @route GET /api/products
 // @acess Public
 const getAllProducts = asyncHandler(async (req, res) => {
-  const pageSize = 1;
+  const pageSize = 3;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -36,6 +36,15 @@ const getProductById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Resource not found");
   }
+});
+
+// @desc    Get top rated products
+// @route   GET /api/products/top
+// @access  Public
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
 });
 // @desc    Create a product
 // @route   POST /api/products
@@ -140,6 +149,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 module.exports = {
   getAllProducts,
   getProductById,
+  getTopProducts,
   createProduct,
   updateProduct,
   deleteProduct,
