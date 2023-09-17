@@ -17,7 +17,7 @@ const HomeScreen = () => {
     <>
       <div className="max-w-[75%] mx-auto mb-4">
         {!keyword ? (
-          <ProductCarousel />
+          <ProductCarousel className="z-0" />
         ) : (
           <Link to="/" className="btn ">
             Exit Search Mode
