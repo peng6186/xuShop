@@ -45,18 +45,18 @@ const Header = () => {
   };
 
   return (
-    <div className="h-16 bg-[#3c4c5d]">
+    <div className="h-16 background-gradient">
       <div className="mx-4 md:max-w-[75%] md:mx-auto flex justify-between items-center">
         <Link to={"/"}>
           <div className="flex items-center gap-1">
             <img src={logo} alt="logo" className="w-16 h-16" />
-            <span className="text-slate-300 font-bold ">XuShop</span>
+            <span className="text-slate-500 font-bold ">XuShop</span>
           </div>
         </Link>
 
         <div className="items-center gap-4 text-base hidden md:flex">
           <Searchbar />
-          <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
+          <div className="flex gap-1 items-center font-semibold text-slate-500 cursor-pointer">
             <AiOutlineShoppingCart />
             <Link to="/cart">
               <span>Cart</span>
@@ -129,7 +129,7 @@ const Header = () => {
               </Menu>
             </div>
           ) : (
-            <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
+            <div className="flex gap-1 items-center font-semibold text-slate-500 cursor-pointer">
               <AiOutlineUser />
               <Link to={"/login"}>
                 <span>Log In</span>
@@ -235,7 +235,7 @@ const Header = () => {
 
         {/* drop down menu */}
         <div
-          className={`absolute top-0 h-screen w-2/3  bg-gradient-to-tl from-white/10 to-[bgprimary] backdrop-blur-lg p-6 smooth-transition ${
+          className={`z-40 absolute top-0 h-screen w-2/3  bg-gradient-to-tl from-white/10 to-[bgprimary] backdrop-blur-lg p-6 smooth-transition ${
             mobileMenuOpen ? "left-0" : "-left-full"
           } md:hidden`}
         >

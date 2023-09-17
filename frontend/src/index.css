@@ -5,3 +5,10 @@
 .smooth-transition {
   transition: all 0.3s ease-in-out;
 }
+
+.background-gradient {
+  @apply bg-gradient-to-tr from-white via-gray-300  to-indigo-400;
+}
+.carousel-gradient {
+  @apply bg-gradient-to-tr from-white via-gray-300  to-blue-100;
+}

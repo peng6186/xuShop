@@ -9,10 +9,14 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message>{error?.data?.message || error.error}</Message>
   ) : (
-    <div className="carousel w-full bg-[#3b4c5c] rounded-md">
+    <div className="carousel w-full carousel-gradient rounded-md z-0">
       {products.map((product, idx) => (
-        <div key={product._id} className="carousel-item w-full relative">
-          <Link to={`/product/${product._id}`} id={idx}>
+        <div
+          key={product._id}
+          className="carousel-item w-full relative"
+          id={idx}
+        >
+          <Link to={`/product/${product._id}`}>
             <img
               src={product.image}
               alt={product.name}

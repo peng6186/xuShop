@@ -5,7 +5,7 @@ const Product = require("../models/productModel.js");
 // @route GET /api/products
 // @acess Public
 const getAllProducts = asyncHandler(async (req, res) => {
-  const pageSize = 3;
+  const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
