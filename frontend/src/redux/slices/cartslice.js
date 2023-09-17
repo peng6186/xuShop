@@ -48,6 +48,7 @@ const cartSlice = createSlice({
       // Update the corresponding Shipping fee, tax fee, etc.
       updateCart(state);
     },
+    resetCart: (state) => (state = initialState),
   },
 });
 
@@ -57,5 +58,6 @@ export const {
   savingShippingAddress,
   savingPaymentMethod,
   clearCartItems,
+  resetCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

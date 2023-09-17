@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { useLogOutMutation } from "../redux/slices/usersApiSlice";
 import { clearCredentials } from "../redux/slices/authslice";
 import Searchbar from "./Searchbar";
+import { resetCart } from "../redux/slices/cartslice";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -33,7 +34,11 @@ const Header = () => {
     try {
       await logout().unwrap();
       dispatch(clearCredentials());
+      dispatch(resetCart());
+      console.log("before navi to /login");
       navigate("/login");
+      window.location.reload();
+      console.log("after navi to /login");
     } catch (error) {
       toast(error.error);
     }
@@ -64,7 +69,7 @@ const Header = () => {
           </div>
           {userInfo ? (
             <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
-              <Menu as="div" className="relative inline-block text-left">
+              <Menu as="div" className="relative inline-block text-left z-30">
                 <div>
                   <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                     {userInfo.name}
@@ -133,7 +138,7 @@ const Header = () => {
           )}
           {userInfo && userInfo.isAdmin && (
             <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
-              <Menu as="div" className="relative inline-block text-left">
+              <Menu as="div" className="relative inline-block text-left z-30">
                 <div>
                   <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                     Admin
@@ -258,7 +263,7 @@ const Header = () => {
 
             {userInfo ? (
               <div className="flex gap-1 justify-center items-center font-semibold text-slate-500 cursor-pointer hover:text-cyan-400 text-lg">
-                <Menu as="div" className="relative inline-block text-left">
+                <Menu as="div" className="relative inline-block text-left z-30">
                   <div>
                     <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                       {userInfo.name}
@@ -330,7 +335,7 @@ const Header = () => {
             )}
             {userInfo && userInfo.isAdmin && (
               <div className="flex gap-1 justify-center items-center font-semibold text-slate-300 cursor-pointer">
-                <Menu as="div" className="relative inline-block text-left">
+                <Menu as="div" className="relative inline-block text-left z-30">
                   <div>
                     <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                       Admin
