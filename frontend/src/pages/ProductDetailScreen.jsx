@@ -22,8 +22,8 @@ const ProductDetailScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("rating: ", rating);
-  console.log("typeof rating: ", typeof rating);
+  // console.log("rating: ", rating);
+  // console.log("typeof rating: ", typeof rating);
   const {
     data: product,
     isLoading,

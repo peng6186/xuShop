@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import Pagination from "../../components/Pagination";
 import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
+
 import {
   useGetProductsQuery,
   useCreateProductMutation,
@@ -11,10 +13,10 @@ import {
 } from "../../redux/slices/productsApiSlice";
 
 const ProductListScreen = () => {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, error, refetch } = useGetProductsQuery(pageNumber);
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
-
   const [deleteProduct, { isLoading: loadingDelete }] =
     useDeleteProductMutation();
 
@@ -75,7 +77,7 @@ const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {data.products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -99,7 +101,7 @@ const ProductListScreen = () => {
               ))}
             </tbody>
           </table>
-          {/* PAGINATE PLACEHOLDER */}
+          <Pagination page={data.page} pages={data.pages} isAdmin={true} />
         </>
       )}
     </div>

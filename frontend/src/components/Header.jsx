@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useLogOutMutation } from "../redux/slices/usersApiSlice";
 import { clearCredentials } from "../redux/slices/authslice";
+import Searchbar from "./Searchbar";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -49,17 +50,7 @@ const Header = () => {
         </Link>
 
         <div className="items-center gap-4 text-base hidden md:flex">
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              placeholder="Search Products..."
-              className="outline-0 bg-transparent border-b border-gray-300 text-slate-300 text-lg
-              placeholder:text-slate-400"
-            />
-            <button className="border py-2 px-4 rounded-md font-semibold text-slate-400 hover:text-slate-300">
-              Search
-            </button>
-          </div>
+          <Searchbar />
           <div className="flex gap-1 items-center font-semibold text-slate-300 cursor-pointer">
             <AiOutlineShoppingCart />
             <Link to="/cart">
