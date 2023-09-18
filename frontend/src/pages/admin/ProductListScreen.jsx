@@ -86,14 +86,14 @@ const ProductListScreen = () => {
                   <td>${product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
-                  <td className="flex items-start gap-2">
+                  <td className="flex items-center gap-2">
                     <Link to={`/admin/product/${product._id}/edit`}>
-                      <button className="border">
+                      <button className="btn">
                         <FaEdit />
                       </button>
                     </Link>
                     <button
-                      className="border"
+                      className="btn"
                       onClick={() => deleteHandler(product._id)}
                     >
                       <FaTrash style={{}} />
