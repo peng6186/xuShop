@@ -166,7 +166,7 @@ const OrderScreen = () => {
                         />
                       </div>
                       <div>
-                        <Link to={`/product/${item._id}`}>
+                        <Link to={`/product/${item.product}`}>
                           <p className="text-base text-slate-400 font-semibold">
                             {item.name}
                           </p>
