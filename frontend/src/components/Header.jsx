@@ -35,10 +35,10 @@ const Header = () => {
       await logout().unwrap();
       dispatch(clearCredentials());
       dispatch(resetCart());
-      console.log("before navi to /login");
-      navigate("/login");
+      // console.log("before navi to /login");
+      navigate("/");
       window.location.reload();
-      console.log("after navi to /login");
+      // console.log("after navi to /login");
     } catch (error) {
       toast(error.error);
     }
