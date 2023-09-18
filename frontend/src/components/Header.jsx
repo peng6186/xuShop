@@ -265,7 +265,7 @@ const Header = () => {
               <div className="flex gap-1 justify-center items-center font-semibold text-slate-500 cursor-pointer hover:text-cyan-400 text-lg">
                 <Menu as="div" className="relative inline-block text-left z-30">
                   <div>
-                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                    <Menu.Button className=" inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                       {userInfo.name}
                       <ChevronDownIcon
                         className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
@@ -282,7 +282,7 @@ const Header = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 mb-8  origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="px-1 py-1 ">
                         <Menu.Item>
                           {({ active }) => (
@@ -328,7 +328,7 @@ const Header = () => {
             ) : (
               <div className="flex gap-1 justify-center items-center font-semibold text-slate-500 cursor-pointer hover:text-cyan-400 text-lg">
                 <AiOutlineUser />
-                <Link to={"/login"}>
+                <Link to={"/login"} onClick={() => setMobileMenuOpen(false)}>
                   <span>Log In</span>
                 </Link>
               </div>
@@ -337,7 +337,7 @@ const Header = () => {
               <div className="flex gap-1 justify-center items-center font-semibold text-slate-300 cursor-pointer">
                 <Menu as="div" className="relative inline-block text-left z-30">
                   <div>
-                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                    <Menu.Button className="mt-8 inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                       Admin
                       <ChevronDownIcon
                         className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
@@ -354,7 +354,7 @@ const Header = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 w-28 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="px-1 py-1 ">
                         <Menu.Item>
                           {({ active }) => (
@@ -363,11 +363,11 @@ const Header = () => {
                                 navigate("/admin/orderlist");
                                 setMobileMenuOpen(false);
                               }}
-                              className={`${
+                              className={`w-full ${
                                 active
                                   ? "bg-violet-500 text-white"
                                   : "text-gray-900"
-                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                              } group flex  items-center rounded-md px-2 py-2 text-sm`}
                             >
                               <FaProductHunt className="mr-2 h-5 w-5" />
                               Products
@@ -381,7 +381,7 @@ const Header = () => {
                                 navigate("/admin/orderlist");
                                 setMobileMenuOpen(false);
                               }}
-                              className={`${
+                              className={` ${
                                 active
                                   ? "bg-violet-500 text-white"
                                   : "text-gray-900"
@@ -399,11 +399,11 @@ const Header = () => {
                                 navigate("/admin/userlist");
                                 setMobileMenuOpen(false);
                               }}
-                              className={`${
+                              className={`w-full ${
                                 active
                                   ? "bg-violet-500 text-white"
                                   : "text-gray-900"
-                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                              } group flex items-center rounded-md px-2 py-2 text-sm `}
                             >
                               <MdInventory className="mr-2 h-5 w-5" />
                               Users
