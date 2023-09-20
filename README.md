@@ -16,7 +16,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**[XuShop](https://xushop.onrender.com)** is an modern eCommerce platform that allows alumni to prchase their favorite college souvenirs. What's more, it even offers admin features that allows admin users to manage customers & orders information,etc.
+**[XuShop](https://xushop.onrender.com)** is a modern eCommerce platform that allows alumni to prchase their favorite college souvenirs. What's more, it even offers admin features that allows admin users to manage customers & orders information,etc.
 
 ### Key Features
   - **Product detail page**: Customers could check out the detailed information about the product they're interested in, such as product name, brand, detailed description, other customers' reviews and ratings, etc.
