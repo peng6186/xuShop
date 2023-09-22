@@ -47,9 +47,12 @@ const RegisterScreen = () => {
 
   return (
     <div className="max-w-[75%] mx-auto py-4 flex justify-center items-center">
-      <form className="flex flex-col gap-8" onSubmit={submitHandler}>
+      <form
+        className="flex-1 flex flex-col justify-center items-center gap-8"
+        onSubmit={submitHandler}
+      >
         <h2 className="text-[#828f9d] text-4xl font-semibold">Register</h2>
-        <div className="flex flex-col gap-2 w-[450px]">
+        <div className="flex flex-col gap-2 flex-1  w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="email">
             Name:
           </label>
@@ -63,7 +66,7 @@ const RegisterScreen = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2 w-[450px]">
+        <div className="flex flex-col gap-2 flex-1  w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="email">
             Email:
           </label>
@@ -78,7 +81,7 @@ const RegisterScreen = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-2  w-[450px]">
+        <div className="flex flex-col gap-2  flex-1  w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="pw">
             Password:
           </label>
@@ -92,7 +95,7 @@ const RegisterScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2  w-[450px]">
+        <div className="flex flex-col gap-2 flex-1  w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="cfpw">
             Confirm Password:
           </label>
@@ -108,7 +111,7 @@ const RegisterScreen = () => {
         </div>
         <button
           disabled={isLoading}
-          className="py-2 px-4 border rounded-lg text-slate-500 font-semibold hover:opacity-60"
+          className="flex-1  w-full md:max-w-[450px] py-2 px-4 border rounded-lg text-slate-500 font-semibold hover:opacity-60"
         >
           Register
         </button>

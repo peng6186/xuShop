@@ -40,11 +40,14 @@ const LogInScreen = () => {
 
   return (
     <div className="max-w-[75%] mx-auto py-4 flex justify-center items-center">
-      <form className="flex flex-col gap-8 px-4" onSubmit={submitHandler}>
+      <form
+        className="flex-1 flex flex-col justify-center items-center gap-8 px-4"
+        onSubmit={submitHandler}
+      >
         <h2 className="text-[#828f9d] text-4xl font-semibold text-center">
           Log In
         </h2>
-        <div className="flex flex-col gap-2 w-full md:max-w-[450px]">
+        <div className="flex-1 flex flex-col gap-2 w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="email">
             Email:
           </label>
@@ -58,7 +61,7 @@ const LogInScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full md:max-w-[450px]">
+        <div className="flex-1 flex flex-col gap-2 w-full md:max-w-[450px]">
           <label className="text-xl text-slate-500" htmlFor="pw">
             Password:
           </label>
@@ -74,7 +77,7 @@ const LogInScreen = () => {
         </div>
         <button
           disabled={isLoading}
-          className="py-2 px-4 border rounded-lg text-slate-500 font-semibold hover:opacity-60"
+          className="flex-1 w-full md:max-w-[450px] py-2 px-4 border rounded-lg text-slate-500 font-semibold hover:opacity-60"
         >
           Log In
         </button>
